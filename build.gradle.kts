@@ -44,5 +44,5 @@ tasks {
 
 
 application {
-    mainClass.set("DiscordApiKt")
+    mainClass.set("me.quiu.kotlincord.DiscordApiKt")
 }

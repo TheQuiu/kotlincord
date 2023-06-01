@@ -1,4 +1,4 @@
-package me.quiu.kotlincord.discord.api.role
+package me.quiu.kotlincord.discord.api.guild.role
 
 data class RoleTags(
     val botId: String?,

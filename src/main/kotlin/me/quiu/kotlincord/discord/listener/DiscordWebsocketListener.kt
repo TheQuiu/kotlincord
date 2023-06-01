@@ -11,7 +11,7 @@ import okhttp3.WebSocketListener
 class DiscordWebsocketListener : WebSocketListener() {
 
     override fun onClosing(webSocket: WebSocket, code: Int, reason: String) {
-        println("Closing connection with discord gateway...")
+        println("Closing connection with discord gateway... with reason: " + reason)
     }
 
     override fun onClosed(webSocket: WebSocket, code: Int, reason: String) {
@@ -27,20 +27,21 @@ class DiscordWebsocketListener : WebSocketListener() {
     }
 
     override fun onOpen(webSocket: WebSocket, response: Response) {
+        println("Connected to discord websocket...")
         val taskManagerI: DiscordTaskManager = DiscordTasksManager()
         taskManagerI.runTask(HeartBeat(webSocket))
         makeIdentify(webSocket)
     }
 
-    fun makeIdentify(webSocket: WebSocket) {
+    private fun makeIdentify(webSocket: WebSocket) {
         val identifyJson = """
-                            {9
+                            {
                               "op": 2,
                               "d": {
                                 "token": "${System.getProperty("token")}",
                                 "intents": 513,
                                 "properties": {
-                                  "os": ${System.getProperty("os.name")},
+                                  "os": "${System.getProperty("os.name")}",
                                   "browser": "KotlinCord",
                                   "device": "PC"
                                 }

@@ -18,7 +18,7 @@ class HeartBeat(
             while (true) {
                 delay(heartbeatInterval.toLong())
                 webSocket.send("{\"op\": 1, \"d\": null}")
-                println("Sending HeartBeat to discord...")
+                println("Sending KeepAlive event to discord...")
             }
         }
     }

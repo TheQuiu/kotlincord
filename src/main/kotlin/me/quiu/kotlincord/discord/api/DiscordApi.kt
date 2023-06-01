@@ -2,6 +2,8 @@ package me.quiu.kotlincord.discord.api
 
 import com.fasterxml.jackson.databind.ObjectMapper
 import me.quiu.kotlincord.discord.DiscordApi
+import me.quiu.kotlincord.discord.api.guild.loader.GuildLoader
+import me.quiu.kotlincord.discord.api.guild.loader.impl.GuildLoaderImpl
 import me.quiu.kotlincord.discord.api.member.loader.MemberLoader
 import me.quiu.kotlincord.discord.api.member.loader.impl.MemberLoaderImpl
 import me.quiu.kotlincord.discord.api.task.manager.DiscordTaskManager
@@ -18,6 +20,7 @@ import java.io.IOException
 @SpringBootApplication
 class DiscordApi : DiscordApi {
 
+    private lateinit var guildLoader: GuildLoader
     private lateinit var tasksManager: DiscordTaskManager
     private lateinit var memberLoader: MemberLoader
     private lateinit var discordWebSocketListener: WebSocketListener
@@ -52,6 +55,10 @@ class DiscordApi : DiscordApi {
         return this.discordWebSocketListener
     }
 
+    override fun getGuildLoader(): GuildLoader {
+        return this.guildLoader
+    }
+
     private fun doLogin(token: String) {
         init()
         val request = Request.Builder()
@@ -83,6 +90,9 @@ class DiscordApi : DiscordApi {
     }
 
     private fun init() {
+        if (System.getProperty("token").isEmpty()) System.setProperty("token", this.token)
+
+        this.guildLoader = GuildLoaderImpl()
         this.discordWebSocketListener = DiscordWebsocketListener()
         this.memberLoader = MemberLoaderImpl()
         this.tasksManager = DiscordTasksManager()

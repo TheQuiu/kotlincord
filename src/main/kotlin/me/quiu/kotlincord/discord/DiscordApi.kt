@@ -2,7 +2,6 @@ package me.quiu.kotlincord.discord
 
 import me.quiu.kotlincord.discord.api.guild.loader.GuildLoader
 import me.quiu.kotlincord.discord.api.member.loader.MemberLoader
-import me.quiu.kotlincord.discord.api.member.loader.impl.MemberLoaderImpl
 import me.quiu.kotlincord.discord.api.task.manager.DiscordTaskManager
 import okhttp3.WebSocketListener
 

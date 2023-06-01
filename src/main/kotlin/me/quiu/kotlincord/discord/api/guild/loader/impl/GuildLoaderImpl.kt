@@ -8,15 +8,15 @@ import okhttp3.OkHttpClient
 import okhttp3.Request
 import okhttp3.Response
 
-class GuildLoaderImpl: GuildLoader {
+class GuildLoaderImpl : GuildLoader {
     private val httpClient = OkHttpClient()
     private val discordApiUrl: String = "https://discord.com/api/v10/guilds/"
     private val requestBuilder: Request.Builder = Request.Builder()
-            .header("Authorization", "Bot ${System.getProperty("token")}")
-            .get()
+        .header("Authorization", "Bot ${System.getProperty("token")}")
+        .get()
     private val gson: Gson = Gson()
     override fun loadGuildInfo(id: String): Guild? {
-        val response: Response = httpClient.newCall(requestBuilder.url(discordApiUrl+id).build()).execute()
+        val response: Response = httpClient.newCall(requestBuilder.url(discordApiUrl + id).build()).execute()
         val body = response.body.string()
         return gson.fromJson(body, Guild::class.java)
     }

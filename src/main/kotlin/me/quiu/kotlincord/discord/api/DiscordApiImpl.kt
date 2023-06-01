@@ -18,7 +18,7 @@ import org.springframework.context.ConfigurableApplicationContext
 import java.io.IOException
 
 @SpringBootApplication
-class DiscordApi : DiscordApi {
+class DiscordApiImpl : DiscordApi {
 
     private lateinit var guildLoader: GuildLoader
     private lateinit var tasksManager: DiscordTaskManager
@@ -36,6 +36,8 @@ class DiscordApi : DiscordApi {
     }
 
     override fun login() {
+        this.token = System.getProperty("token")
+        println(this.token)
         doLogin(System.getProperty("token"))
     }
 
@@ -90,7 +92,6 @@ class DiscordApi : DiscordApi {
     }
 
     private fun init() {
-        if (System.getProperty("token").isEmpty()) System.setProperty("token", this.token)
 
         this.guildLoader = GuildLoaderImpl()
         this.discordWebSocketListener = DiscordWebsocketListener()

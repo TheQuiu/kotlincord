@@ -1,11 +1,11 @@
 package me.quiu.kotlincord
 
-import me.quiu.kotlincord.discord.api.DiscordApi
+import me.quiu.kotlincord.discord.api.DiscordApiImpl
 import me.quiu.kotlincord.discord.api.guild.loader.GuildLoader
 
 
 fun main() {
-    val api = DiscordApi()
+    val api = DiscordApiImpl()
     api.login()
     val memberLoader = api.getMemberLoader()
     val guildLoaderImpl: GuildLoader = api.getGuildLoader()

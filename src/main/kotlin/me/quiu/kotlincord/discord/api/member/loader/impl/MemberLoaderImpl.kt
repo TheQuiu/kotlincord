@@ -1,8 +1,8 @@
 package me.quiu.kotlincord.discord.api.member.loader.impl
 
 import com.google.gson.Gson
-import me.quiu.kotlincord.discord.api.member.type.Member
 import me.quiu.kotlincord.discord.api.member.loader.MemberLoader
+import me.quiu.kotlincord.discord.api.member.type.Member
 import okhttp3.OkHttpClient
 import okhttp3.Request
 
@@ -26,7 +26,7 @@ class MemberLoaderImpl : MemberLoader {
 
     override fun loadUsersByIds(ids: List<String>): List<Member> {
         var result: ArrayList<Member> = ArrayList()
-        for (id in ids){
+        for (id in ids) {
             val response = httpClient.newCall(
                 request
                     .url(usersUrl + id)

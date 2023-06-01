@@ -11,6 +11,7 @@ java.sourceCompatibility = JavaVersion.VERSION_17
 
 repositories {
     mavenCentral()
+
 }
 
 dependencies {
@@ -24,6 +25,8 @@ dependencies {
     implementation(kotlin("stdlib-jdk8"))
     implementation("com.fasterxml.jackson.module:jackson-module-kotlin:+")
     implementation("com.squareup.okhttp3:okhttp:+")
+    testImplementation("org.junit.jupiter:junit-jupiter-api:5.2.0")
+    testRuntimeOnly("org.junit.jupiter:junit-jupiter-engine:5.2.0")
 }
 
 tasks {
@@ -41,6 +44,12 @@ tasks {
     }
 }
 
+
+tasks.withType<Test> {
+    systemProperty("token", System.getProperty("token"))
+
+    useJUnitPlatform()
+}
 
 
 application {
